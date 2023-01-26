@@ -76,7 +76,8 @@ char *token_type[100] =
         "Scan",
         "Print",
         "Delete",
-        "From"};
+        "From",
+        "Address"};
 
 int *find_file()
 {
@@ -184,7 +185,8 @@ int scanFile(lexer_t *lexer)
         "TOKEN_PRINT",
         "TOKEN_SCAN",
         "TOKEN_DEL",
-        "TOKEN_FROM"};
+        "TOKEN_FROM",
+        "TOKEN_ADDRESS"};
 
     // printf("TOKEN-NUMBER\tTOKEN-CODE\t\t\tTOKEN-INFO\t\tLEXEME\t\t\tPOS.(LINE, CH)\n");
     // fprintf(output_ptr, "TOKEN-NUMBER\tTOKEN-CODE\t\t\t\t\tTOKEN-INFO\t\t\tLEXEME\t\t\tPOS.(LINE, CH)\n");

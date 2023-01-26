@@ -230,7 +230,7 @@ token_t *lexer_get_next_token(lexer_t *lexer)
             }
             else
             {
-                return lexer_advance_with_token(lexer, init_token(TOKEN_UNKNOWN, lexer_get_current_char_as_string(lexer), lexer->l, startPos));
+                return lexer_advance_with_token(lexer, init_token(TOKEN_ADDRESS, lexer_get_current_char_as_string(lexer), lexer->l, startPos));
             }
             break;
         case '!':
@@ -282,6 +282,8 @@ token_t *lexer_get_next_token(lexer_t *lexer)
                 break;
             }
             // Unknown
+            
+            printf("In token unknown: %s\n", lexer->c);
             return lexer_advance_with_token(lexer, init_token(TOKEN_UNKNOWN, lexer_get_current_char_as_string(lexer), lexer->l, startPos));
             break;
         }
@@ -1311,7 +1313,7 @@ token_t *lexer_collect_number(lexer_t *lexer)
     int decimal_count = 0;
     int flag_invalid = 0;
     int startPos = lexer->lc;
-    while ((isdigit(lexer->c) == 1 || lexer->c == '.'))
+    while ((isdigit(lexer->c) || lexer->c == '.'))
     {
         if (lexer->c == '.')
         {

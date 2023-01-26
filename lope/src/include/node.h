@@ -22,7 +22,12 @@ typedef enum
     UNARY,
     WHILE,
     ERROR,
-    ATOM
+    ATOM,
+    DECLARATION,
+    SCAN,
+    PRINT_STR,
+    PRINT_VAL,
+    PRINT_EXP,
 } nodeType;
 
 typedef struct
@@ -66,6 +71,31 @@ typedef struct
     node_t *assignType;
     node_t *expr;
 } assgnNode;
+typedef struct 
+{
+    node_t *dataType;
+    node_t *identifier;
+} declarationWithIDNode;
+// declaration statement with identifier only
+typedef struct 
+{
+    node_t *stringFormat;
+    node_t *varAddress;
+} scanNode;
+typedef struct
+{
+    node_t *stringValue;
+} printStringNode;
+typedef struct 
+{
+    node_t *stringFormat;
+    node_t *identifier;
+} printValueNode;
+typedef struct
+{
+    node_t *stringFormat;
+    node_t *expression;
+} printExp;
 
 // typedef struct
 // {
@@ -90,6 +120,11 @@ typedef union
     unaryNode *unary;
     tokenNode *atom;
     errorNode *error;
+    declarationWithIDNode *decStmnt;
+    scanNode *input;
+    printStringNode *printString;
+    printValueNode *printValue;
+    printExp *printExpression;
 } nodeValue;
 
 struct node_t
@@ -138,6 +173,10 @@ node_t *muldivN(parser_t *parser);
 node_t *unaryN(parser_t *parser);
 // literal = atom | comparison
 node_t *literalTerm(parser_t *parser);
+
+node_t *scanN(parser_t *parser);
+
+node_t *printN(parser_t *parser);
 
 // Generates the token nodes
 

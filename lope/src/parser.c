@@ -231,6 +231,26 @@ void traverse_statements(node_t **statements, int count, int depth)
         case ATOM:
             printf("ATOM: %s\n", statements[x]->value.atom->nodeToken->value);
             break;
+        case DECLARATION:
+            printf("Declaration:\n");
+            traverse(statements[x], depth + 1);
+            break;
+        case SCAN:
+            printf("Scan:\n");
+            traverse(statements[x], depth + 1);
+            break;
+        case PRINT_STR:
+            printf("Print:\n");
+            traverse(statements[x], depth + 1);
+            break;
+        case PRINT_VAL:
+            printf("Print:\n");
+            traverse(statements[x], depth + 1);
+            break;
+        case PRINT_EXP:
+            printf("Print:\n");
+            traverse(statements[x], depth + 1);
+            break;
         default:
             break;
         }
@@ -286,10 +306,30 @@ void traverse(node_t *node, int depth)
         traverse(node->value.unary->operation, depth + 1);
         traverse(node->value.unary->token, depth + 1);
         break;
+    case DECLARATION:
+        traverse(node->value.decStmnt->dataType, depth + 1);
+        traverse(node->value.decStmnt->identifier, depth + 1);
+        break;
+    case SCAN:
+        traverse(node->value.input->stringFormat, depth + 1);
+        traverse(node->value.input->varAddress, depth + 1);
+        break;
+    case PRINT_STR:
+        traverse(node->value.printString->stringValue, depth + 1);
+        break;
+    case PRINT_VAL:
+        traverse(node->value.printValue->stringFormat, depth + 1);
+        traverse(node->value.printValue->identifier, depth + 1);
+        break;
+    case PRINT_EXP:
+        traverse(node->value.printExpression->stringFormat, depth + 1);
+        traverse(node->value.printExpression->expression, depth + 1);
+        break;
     default:
         break;
     }
 }
+// 
 void indent(int indent_count)
 {
     for (int x = 0; x < indent_count; x++)

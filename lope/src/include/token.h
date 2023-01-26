@@ -93,6 +93,7 @@ typedef enum
     TOKEN_SCAN,      // kuha
     TOKEN_DEL,       // ibura
     TOKEN_FROM,      // angkat
+    TOKEN_ADDRESS,   // &identifier
 } type;
 typedef struct TOKEN_STRUCT
 {
